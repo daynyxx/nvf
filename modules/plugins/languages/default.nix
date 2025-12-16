@@ -3,6 +3,7 @@
 in {
   imports = [
     ./angular.nix
+    ./ansible.nix
     ./arduino.nix
     ./asciidoc.nix
     ./asm.nix
