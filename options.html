@@ -5841,6 +5841,60 @@
   
   <li>
     <details class="toc-category">
+      <summary title="vim.languages.ansible">
+        <span>vim.languages.ansible</span>
+        <span class="toc-count">5</span>
+      </summary>
+      <ul>
+        
+
+        
+        <li>
+          <a href='#option-vim-languages-ansible-enable' title="vim.languages.ansible.enable">
+            enable
+            
+            
+          </a>
+        </li>
+        
+        <li>
+          <a href='#option-vim-languages-ansible-lsp-enable' title="vim.languages.ansible.lsp.enable">
+            lsp.enable
+            
+            
+          </a>
+        </li>
+        
+        <li>
+          <a href='#option-vim-languages-ansible-lsp-servers' title="vim.languages.ansible.lsp.servers">
+            lsp.servers
+            
+            
+          </a>
+        </li>
+        
+        <li>
+          <a href='#option-vim-languages-ansible-treesitter-enable' title="vim.languages.ansible.treesitter.enable">
+            treesitter.enable
+            
+            
+          </a>
+        </li>
+        
+        <li>
+          <a href='#option-vim-languages-ansible-treesitter-package' title="vim.languages.ansible.treesitter.package">
+            treesitter.package
+            
+            
+          </a>
+        </li>
+        
+      </ul>
+    </details>
+  </li>
+  
+  <li>
+    <details class="toc-category">
       <summary title="vim.languages.assembly">
         <span>vim.languages.assembly</span>
         <span class="toc-count">5</span>
@@ -28140,6 +28194,71 @@ Thus, it will not be wrapped in <code>""</code>.</p>
 </body></html></div>
   <div class="option-default">Default: <code>false</code></div>
   <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/neovim/mappings/options.nix" target="_blank">&lt;nvf/modules/neovim/mappings/options.nix&gt;</a></code></div>
+</div>
+<div class="option" id="option-vim-languages-ansible-enable">
+  <h3 class="option-name">
+    <a href="#option-vim-languages-ansible-enable" class="option-anchor">vim.languages.ansible.enable</a>
+    <span class="copy-link" title="Copy link to this option"></span>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-type">Type: <code>boolean</code></div>
+  <div class="option-description"><html><head></head><body><p>Whether to enable Ansible language support.</p>
+</body></html></div>
+  <div class="option-default">Default: <code>false</code></div>
+  <div class="option-example">Example: <code>true</code></div>
+  <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/plugins/languages/ansible.nix" target="_blank">&lt;nvf/modules/plugins/languages/ansible.nix&gt;</a></code></div>
+</div>
+<div class="option" id="option-vim-languages-ansible-lsp-enable">
+  <h3 class="option-name">
+    <a href="#option-vim-languages-ansible-lsp-enable" class="option-anchor">vim.languages.ansible.lsp.enable</a>
+    <span class="copy-link" title="Copy link to this option"></span>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-type">Type: <code>boolean</code></div>
+  <div class="option-description"><html><head></head><body><p>Whether to enable Ansible LSP support.</p>
+</body></html></div>
+  <div class="option-default">Default: <code>false</code></div>
+  <div class="option-example">Example: <code>true</code></div>
+  <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/plugins/languages/ansible.nix" target="_blank">&lt;nvf/modules/plugins/languages/ansible.nix&gt;</a></code></div>
+</div>
+<div class="option" id="option-vim-languages-ansible-lsp-servers">
+  <h3 class="option-name">
+    <a href="#option-vim-languages-ansible-lsp-servers" class="option-anchor">vim.languages.ansible.lsp.servers</a>
+    <span class="copy-link" title="Copy link to this option"></span>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-type">Type: <code>(list of value "ansible-language-server" (singular enum)) or value "ansible-language-server" (singular enum) convertible to it</code></div>
+  <div class="option-description"><html><head></head><body><p>Ansible LSP server to use</p>
+</body></html></div>
+  <div class="option-default">Default: <code>[
+  "ansible-language-server"
+]</code></div>
+  <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/plugins/languages/ansible.nix" target="_blank">&lt;nvf/modules/plugins/languages/ansible.nix&gt;</a></code></div>
+</div>
+<div class="option" id="option-vim-languages-ansible-treesitter-enable">
+  <h3 class="option-name">
+    <a href="#option-vim-languages-ansible-treesitter-enable" class="option-anchor">vim.languages.ansible.treesitter.enable</a>
+    <span class="copy-link" title="Copy link to this option"></span>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-type">Type: <code>boolean</code></div>
+  <div class="option-description"><html><head></head><body><p>Whether to enable YAML treesitter.</p>
+</body></html></div>
+  <div class="option-default">Default: <code>false</code></div>
+  <div class="option-example">Example: <code>true</code></div>
+  <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/plugins/languages/ansible.nix" target="_blank">&lt;nvf/modules/plugins/languages/ansible.nix&gt;</a></code></div>
+</div>
+<div class="option" id="option-vim-languages-ansible-treesitter-package">
+  <h3 class="option-name">
+    <a href="#option-vim-languages-ansible-treesitter-package" class="option-anchor">vim.languages.ansible.treesitter.package</a>
+    <span class="copy-link" title="Copy link to this option"></span>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-type">Type: <code>package</code></div>
+  <div class="option-description"><html><head></head><body><p>The yaml treesitter package to use.</p>
+</body></html></div>
+  <div class="option-default">Default: <code>pkgs.vimPlugins.nvim-treesitter.builtGrammars.yaml</code></div>
+  <div class="option-declared">Declared in: <code><a href="https://github.com/NotAShelf/nvf/blob/main/modules/plugins/languages/ansible.nix" target="_blank">&lt;nvf/modules/plugins/languages/ansible.nix&gt;</a></code></div>
 </div>
 <div class="option" id="option-vim-languages-assembly-enable">
   <h3 class="option-name">
