@@ -71,6 +71,7 @@ isMaximal: {
         enable = isMaximal;
         extensions.crates-nvim.enable = isMaximal;
       };
+      toml.enable = isMaximal;
 
       # Language modules that are not as common.
       assembly.enable = false;
@@ -214,7 +215,6 @@ isMaximal: {
     };
 
     notes = {
-      obsidian.enable = false; # FIXME: neovim fails to build if obsidian is enabled
       neorg.enable = false;
       orgmode.enable = false;
       mind-nvim.enable = isMaximal;
