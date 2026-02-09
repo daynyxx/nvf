@@ -643,6 +643,19 @@
       "url": "https://github.com/ellisonleao/glow.nvim/archive/5d5954b2f22e109d4a6eba8b2618c5b96e4ee7a2.tar.gz",
       "hash": "sha256-CvBcmVWBgI+m+PS7p7PmsiPtTEfqx2kpIzz4mImONIc="
     },
+    "grug-far-nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "MagicDuck",
+        "repo": "grug-far.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "275dbedc96e61a6b8d1dfb28ba51586ddd233dcf",
+      "url": "https://github.com/MagicDuck/grug-far.nvim/archive/275dbedc96e61a6b8d1dfb28ba51586ddd233dcf.tar.gz",
+      "hash": "sha256-qn1BTNCX0Sm158Lv5JfHThqlJX9ualCIlc+RCjWa+t8="
+    },
     "gruvbox": {
       "type": "Git",
       "repository": {
@@ -973,9 +986,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "de79a7626d54d7785436105ef72f37ee8fe8fa16",
-      "url": "https://github.com/OXY2DEV/markview.nvim/archive/de79a7626d54d7785436105ef72f37ee8fe8fa16.tar.gz",
-      "hash": "sha256-kGhohG4Aw9wMceLiX+s2HCWIyWuJYHoa9D80elM1UQw="
+      "revision": "c81ce9ed129387fc5fdec91abe9818a1b0e6fcac",
+      "url": "https://github.com/OXY2DEV/markview.nvim/archive/c81ce9ed129387fc5fdec91abe9818a1b0e6fcac.tar.gz",
+      "hash": "sha256-CoPfVkPWh5neyIT1rVEHMLo7532lWvbv0Gg/27D0PHw="
     },
     "mellow": {
       "type": "Git",
@@ -2527,6 +2540,19 @@
       "revision": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
       "url": "https://github.com/supermaven-inc/supermaven-nvim/archive/07d20fce48a5629686aefb0a7cd4b25e33947d50.tar.gz",
       "hash": "sha256-1z3WKIiikQqoweReUyK5O8MWSRN5y95qcxM6qzlKMME="
+    },
+    "syntax-gaslighting": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NotAShelf",
+        "repo": "syntax-gaslighting.nvim"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "4cee4c0550e82b31e07424e0c44379920d716d79",
+      "url": "https://github.com/NotAShelf/syntax-gaslighting.nvim/archive/4cee4c0550e82b31e07424e0c44379920d716d79.tar.gz",
+      "hash": "sha256-sRg6UlK4hQubxf3ycGnMLi+tNvX3zvKgnHYVuZgmvOc="
     },
     "tabular": {
       "type": "Git",

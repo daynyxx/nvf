@@ -72,6 +72,7 @@ isMaximal: {
         extensions.crates-nvim.enable = isMaximal;
       };
       toml.enable = isMaximal;
+      xml.enable = isMaximal;
 
       # Language modules that are not as common.
       assembly.enable = false;
@@ -91,10 +92,12 @@ isMaximal: {
       ruby.enable = false;
       fsharp.enable = false;
       just.enable = false;
+      make.enable = false;
       qml.enable = false;
-
+      jinja.enable = false;
       tailwind.enable = false;
       svelte.enable = false;
+      tera.enable = false;
 
       # Nim LSP is broken on Darwin and therefore
       # should be disabled by default. Users may still enable
@@ -202,6 +205,7 @@ isMaximal: {
       smart-splits.enable = isMaximal;
       undotree.enable = isMaximal;
       nvim-biscuits.enable = isMaximal;
+      grug-far-nvim.enable = isMaximal;
 
       motion = {
         hop.enable = true;
