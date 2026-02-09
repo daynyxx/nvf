@@ -63,10 +63,11 @@
           </svg>
         </div>
         <nav class="sidebar">
-          <div class="docs-nav">
-            <h2>Documents</h2>
-            <ul>
-              <li><a href="index.html">Introduction</a></li>
+          <details class="sidebar-section" data-section="docs" open>
+            <summary>Documents</summary>
+            <div class="sidebar-section-content">
+              <ul>
+                <li><a href="index.html">Introduction</a></li>
 <li><a href="configuring.html">Configuring nvf</a></li>
 <li><a href="hacking.html">Hacking nvf</a></li>
 <li><a href="tips.html">Helpful Tips</a></li>
@@ -74,13 +75,15 @@
 <li><a href="release-notes.html">Release Notes</a></li>
 <li><a href="search.html">Search</a></li>
 
-            </ul>
-          </div>
+              </ul>
+            </div>
+          </details>
 
-          <div class="toc">
-            <h2>Contents</h2>
-            <ul class="toc-list">
-              <li><a href="#ch-release-notes">Release Notes</a>
+          <details class="sidebar-section" data-section="toc" open>
+            <summary>Contents</summary>
+            <div class="sidebar-section-content">
+              <ul class="toc-list">
+                <li><a href="#ch-release-notes">Release Notes</a>
 <li><a href="#sec-release-0-1">Release 0.1</a>
 <ul><li><a href="#sec-release-0-1-changelog">Changelog</a>
 </ul><li><a href="#sec-release-0-2">Release 0.2</a>
@@ -111,8 +114,9 @@
 <ul><li><a href="#breaking-changes">Breaking changes</a>
 <li><a href="#sec-release-0-9-changelog">Changelog</a>
 </li></ul></li>
-            </ul>
-          </div>
+              </ul>
+            </div>
+          </details>
         </nav>
 
         <main class="content"><html><head></head><body><h1 id="ch-release-notes">Release Notes</h1>
@@ -1221,7 +1225,7 @@ Svelte. Enable them via <a class="option-reference" href="options.html#option-vi
 <li>Add support for <a href="https://astro.build/">Astro</a> language server.</li>
 </ul>
 <h1 id="sec-release-0-8">Release 0.8</h1>
-<h2>Breaking changes</h2>
+<h2 id="breaking-changes">Breaking changes</h2>
 <ul>
 <li>
 <p><code>git-conflict</code> keybinds are now prefixed with <code>&lt;leader&gt;</code> to avoid conflicting
@@ -1817,21 +1821,42 @@ attach behavior.</li>
 <li>Added gitFiles mapping option to telescope</li>
 </ul>
 <h1 id="sec-release-0-9">Release 0.9</h1>
-<h2>Breaking changes</h2>
+<h2 id="breaking-changes">Breaking changes</h2>
 <ul>
-<li>Nixpkgs has merged a fully incompatible rewrite of
+<li>
+<p>Nixpkgs has merged a fully incompatible rewrite of
 <code>vimPlugins.nvim-treesitter</code>. Namely, it changes from the frozen <code>master</code>
-branch to the new main branch. This change also affects how grammars are
-built, and forces us to change a few things around.
+branch to the new main branch. This change removes incremental selections, so
+it is no longer available.</p>
+</li>
+<li>
+<p><a href="https://github.com/obsidian-nvim/obsidian.nvim">obsidian.nvim</a> now uses a maintained fork which has removed the <code>dir</code>
+setting. Use <code>workspaces</code> instead:</p>
+<pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">workspaces</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">name</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">any-string</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">path</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">~/old/dir/path/value</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(132,139,152);">}</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span><br></code></pre>
+<p>Some other settings and commands are now deprecated but are still supported.</p>
 <ul>
-<li>We must now use <code>"nvim-treesitter".setup</code> over the old <code>.configs</code>.
-Additionally, built grammars <strong>no longer include queries by default</strong>,
-therefore queries not managed by nvf will lack their respective syntax
-highlighting capabilities.</li>
+<li>The <code>setupOpts.mappings</code> options were also removed. Use the built-in Neovim
+settings (nvf's <a class="option-reference" href="options.html#option-vim-keymaps"><code class="nixos-option">vim.keymaps</code></a>)</li>
 </ul>
 </li>
 </ul>
+<p><a href="https://github.com/snoweuph">Snoweuph</a></p>
+<ul>
+<li>Fix <code>vim.assistant.codecompanion-nvim.setupOpts.display.diff.provider</code> to only
+allow valid options. <code>default</code> is no longer valid. <code>inline</code> and <code>split</code> are
+two new valid options.</li>
+</ul>
 <h2 id="sec-release-0-9-changelog">Changelog</h2>
+<p><a href="https://github.com/taylrfnt">taylrfnt</a></p>
+<ul>
+<li>
+<p>Introduce a <code>darwinModule</code> option for Darwin users. The ergonomics of
+importing a <code>nixosModule</code> into a Darwin flake were less than ideal, and when
+users fork and update npins, they are prone to encountering errors like the
+following:</p>
+<pre class="highlight"><code class="language-shell"><span style="color:rgb(132,139,152);">(</span><span style="color:rgb(97,175,239);">class:</span>&nbsp;<span style="color:rgb(152,195,121);">"nixos"</span><span style="color:rgb(132,139,152);">)</span>&nbsp;<span style="color:rgb(97,175,239);">cannot</span>&nbsp;<span style="color:rgb(232,102,113);">be</span>&nbsp;<span style="color:rgb(232,102,113);">imported</span>&nbsp;<span style="color:rgb(232,102,113);">into</span>&nbsp;<span style="color:rgb(232,102,113);">a</span>&nbsp;<span style="color:rgb(232,102,113);">module</span>&nbsp;<br><span style="color:rgb(97,175,239);">evaluation</span>&nbsp;<span style="color:rgb(232,102,113);">that</span>&nbsp;<span style="color:rgb(232,102,113);">expects</span>&nbsp;<span style="color:rgb(232,102,113);">class</span>&nbsp;<span style="color:rgb(152,195,121);">"darwin"</span><span style="color:rgb(232,102,113);">.</span><br></code></pre>
+</li>
+</ul>
 <p><a href="https://github.com/suimong">suimong</a>:</p>
 <ul>
 <li>Fix <code>vim.tabline.nvimBufferline</code> where <code>setupOpts.options.hover</code> requires
@@ -1858,8 +1883,190 @@ hard-coded options as default values.</li>
 <ul>
 <li><code>toggleterm</code> open map now also works when in terminal mode</li>
 </ul>
+<p><a href="https://github.com/jtliang24">jtliang24</a>:</p>
+<ul>
+<li>Updated nix language plugin to use pkgs.nixfmt instead of
+pkgs.nixfmt-rfc-style</li>
+</ul>
+<p><a href="https://github.com/alfarelcynthesis">alfarel</a>:</p>
+<ul>
+<li>Upgrade <a href="https://github.com/obsidian-nvim/obsidian.nvim">obsidian.nvim</a> to use a maintained fork, instead of the unmaintained
+upstream.
+<ul>
+<li>Various upstream improvements:
+<ul>
+<li>Support <a href="https://github.com/saghen/blink.cmp">blink.cmp</a> and completion plugin autodetection.</li>
+<li>Support various pickers for prompts, including <a href="https://github.com/folke/snacks.nvim">snacks.nvim</a>'s
+<code>snacks.picker</code>, <a href="https://nvim-mini.org/mini.nvim/">mini.nvim</a>'s <code>mini.pick</code>, <a href="https://github.com/nvim-telescope/telescope.nvim">telescope.nvim</a>, and
+<a href="https://github.com/ibhagwan/fzf-lua">fzf-lua</a>.</li>
+<li>Merge commands like <code>ObsidianBacklinks</code> into <code>Obisidian backlinks</code>. The
+old format is still supported by default.</li>
+<li>Some <code>setupOpts</code> options have changed:
+<ul>
+<li>
+<p><code>disable_frontmatter</code> -&gt; <code>frontmatter.enabled</code> (and inverted), still
+supported.</p>
+</li>
+<li>
+<p><code>note_frontmatter_func</code> -&gt; <code>frontmatter.func</code>, still supported.</p>
+</li>
+<li>
+<p><code>statusline</code> module is now deprecated in favour of <code>footer</code>, still
+supported.</p>
+</li>
+<li>
+<p><code>dir</code> is no longer supported, use <code>workspaces</code>:</p>
+<pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;<span style="color:rgb(86,182,194);">workspaces</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">name</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">any-string</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">path</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">~/old/dir/path/value</span><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(132,139,152);">}</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">]</span><span style="color:rgb(132,139,152);">;</span><br><span style="color:rgb(132,139,152);">}</span><br></code></pre>
+</li>
+<li>
+<p><code>use_advanced_uri</code> -&gt; <code>open.use_advanced_uri</code>.</p>
+</li>
+<li>
+<p>Mappings are now expected to be set using the built-in Neovim APIs,
+managed by <code>vim.keymaps</code> in nvf, instead of <code>mappings</code> options.</p>
+</li>
+<li>
+<p>Some option defaults have changed.</p>
+</li>
+</ul>
+</li>
+<li>And more.</li>
+</ul>
+</li>
+<li>Automatically configure an enabled picker in the order mentioned above, if
+any are enabled.</li>
+<li>Add integration with <code>snacks.image</code> for rendering workspace/vault assets.</li>
+<li>Detect if <a href="https://github.com/MeanderingProgrammer/render-markdown.nvim">render-markdown.nvim</a> or <a href="https://github.com/OXY2DEV/markview.nvim">markview.nvim</a> are enabled and disable
+the <code>ui</code> module if so. It should work without this, but <code>render-markdown</code>'s
+<code class="command">:healthcheck</code> doesn't know that.</li>
+<li>Remove <a href="https://github.com/folke/which-key.nvim">which-key.nvim</a> <code>&lt;leader&gt;o</code> <code>+Notes</code> description which did not
+actually correspond to any keybinds.</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://github.com/pyrox0">pyrox0</a>:</p>
+<ul>
+<li>
+<p>Added <a href="https://github.com/rvben/rumdl">rumdl</a> support to <code>languages.markdown</code></p>
+</li>
+<li>
+<p>Added <a href="https://github.com/quarylabs/sqruff">sqruff</a> support to <code>languages.sql</code></p>
+</li>
+<li>
+<p>Lazy-load <code>crates.nvim</code> plugin when using
+<code>vim.languages.rust.extensions.crates-nvim.enable</code></p>
+</li>
+<li>
+<p>Added <a href="https://pyrefly.org/">Pyrefly</a> and <a href="https://zubanls.com/">zuban</a>
+support to <code>languages.python</code></p>
+</li>
+<li>
+<p>Added TOML support via <a class="option-reference" href="options.html#option-languages-toml"><code class="nixos-option">languages.toml</code></a> and the
+<a href="https://tombi-toml.github.io/tombi/">Tombi</a> language server, linter, and
+formatter.</p>
+</li>
+<li>
+<p>Added Jinja support via <code>languages.jinja</code></p>
+</li>
+<li>
+<p>Added <a href="https://github.com/m-demare/hlargs.nvim">hlargs.nvim</a> support as
+<code>visuals.hlargs-nvim</code>.</p>
+</li>
+<li>
+<p>Lazy-load <code>nvim-autopairs</code> plugin when using
+<code>vim.autopairs.nvim-autopairs.enable</code></p>
+</li>
+</ul>
+<p><a href="https://github.com/machshev">Machshev</a>:</p>
+<ul>
+<li>Added <code>ruff</code> and <code>ty</code> LSP support for Python under <code>programs.python</code>.</li>
+</ul>
+<p><a href="https://github.com/snoweuph">Snoweuph</a></p>
+<ul>
+<li>
+<p>Added <a href="https://github.com/kampfkarren/selene">Selenen</a> for more diagnostics in
+<code>languages.lua</code>.</p>
+</li>
+<li>
+<p>Added XML syntax highlighting, LSP support and formatting</p>
+</li>
+<li>
+<p>Added <a href="https://keats.github.io/tera/">tera</a> language support (syntax
+highlighting only).</p>
+</li>
+<li>
+<p>Added <a href="https://golangci-lint.run/"><code>golangci-lint</code></a> for more diagnostics.</p>
+</li>
+<li>
+<p>Added Makefile support via <code>languages.make</code>.</p>
+</li>
+<li>
+<p>Added Debugging support to <code>languages.php</code>.</p>
+</li>
+<li>
+<p>Didn't Add
+<a href="https://github.com/NotAShelf/syntax-gaslighting.nvim"><code>syntax-gaslighting</code></a>,
+you're crazy.</p>
+</li>
+</ul>
+<p><a href="https://github.com/vagahbond">vagahbond</a>: [codewindow.nvim]:
+<a href="https://github.com/gorbit99/codewindow.nvim">https://github.com/gorbit99/codewindow.nvim</a></p>
+<ul>
+<li>Add [codewindow.nvim] plugin in <code>vim.assistant.codewindow</code> with <code>enable</code> and
+<code>setupOpts</code></li>
+</ul>
+<p><a href="https://github.com/irobot">irobot</a>:</p>
+<ul>
+<li>Fix non-functional <code>vim.keymaps.*.noremap</code>. Now, setting it to false is
+equivalent to <code>:lua vim.keymap.set(..., { remap = true })</code></li>
+</ul>
+<p><a href="https://github.com/kazimazi">kazimazi</a>:</p>
+<ul>
+<li>Added <a href="https://github.com/MagicDuck/grug-far.nvim"><code>grug-far.nvim</code></a> the find
+and replace tool for neovim.</li>
+</ul>
+<!-- vim: set textwidth=80: -->
 </body></html></main>
       </div>
+
+      <aside class="page-toc">
+        <nav class="page-toc-nav">
+          <h3>On this page</h3>
+          <ul class="page-toc-list">
+            <li><a href="#ch-release-notes">Release Notes</a>
+<li><a href="#sec-release-0-1">Release 0.1</a>
+<ul><li><a href="#sec-release-0-1-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-2">Release 0.2</a>
+<ul><li><a href="#sec-release-0-2-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-3">Release 0.3</a>
+<ul><li><a href="#sec-release-0-3-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-4">Release 0.4</a>
+<ul><li><a href="#sec-release-0-4-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-5">Release 0.5</a>
+<ul><li><a href="#sec-release-0-5-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-6">Release 0.6</a>
+<ul><li><a href="#sec-breaking-changes-and-migration-guide">Breaking Changes and Migration Guide</a>
+<li><a href="#sec-release-0-6-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-7">Release 0.7</a>
+<ul><li><a href="#sec-breaking-changes-and-migration-guide-0-7">Breaking Changes and Migration Guide</a>
+<ul><li><a href="#sec-vim-configrc-removed">vim.configRC removed</a>
+<li><a href="#sec-vim-maps-rewrite">vim.maps rewrite</a>
+<li><a href="#sec-nvim-code-action-menu-deprecation">vim.lsp.nvimCodeActionMenu removed in favor of vim.ui.fastaction</a>
+<li><a href="#sec-type-based-modules-removed">type based modules removed</a>
+<li><a href="#sec-nixpkgs-fmt-deprecation">nixpkgs-fmt removed in favor of nixfmt</a>
+<li><a href="#sec-leader-changes">leader changes</a>
+<li><a href="#sec-vim-opt-changes">vim.* changes</a>
+</ul><li><a href="#sec-release-0-7-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-8">Release 0.8</a>
+<ul><li><a href="#breaking-changes">Breaking changes</a>
+<li><a href="#sec-release-0-8-changelog">Changelog</a>
+</ul><li><a href="#sec-release-0-9">Release 0.9</a>
+<ul><li><a href="#breaking-changes">Breaking changes</a>
+<li><a href="#sec-release-0-9-changelog">Changelog</a>
+</li></ul></li>
+          </ul>
+        </nav>
+      </aside>
 
       <footer>
   <p>Generated with ndg</p>
