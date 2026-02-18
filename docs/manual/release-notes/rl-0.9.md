@@ -488,41 +488,9 @@ https://github.com/gorbit99/codewindow.nvim
 
 [neocmakelsp]: https://github.com/neocmakelsp/neocmakelsp
 [arduino-language-server]: https://github.com/arduino/arduino-language-server
-[glsl_analyzer]: https://github.com/nolanderc/glsl_analyzer
-[fish-lsp]: https://www.fish-lsp.dev/
-[fish_indent]: https://fishshell.com/docs/current/cmds/fish_indent.html
 
 - Add CMake support with [neocmakelsp].
 - Add Arduino support with [arduino-language-server].
-- Add GLSL support with [glsl_analyzer].
-- Update fidget-nvim setupOpts and fix NvimTree issue.
-- Add Fish support via {option}`vim.languages.fish.enable` using [fish-lsp] and
-  [fish_indent]. Most of the work done by
-  [poseidon-rises](https://github.com/poseidon-rises) in
-  [!1107](https://github.com/NotAShelf/nvf/pull/1107).
-
-[emo-mruczek](https://emo-mruczek.pet):
-
-[vhdl-ls]: https://github.com/VHDL-LS/rust_hdl
-
-- Add VHDL support with [vhdl-ls].
-
-[itscrystalline](https://github.com/itscrystalline):
-
-[img-clip.nvim]: https://github.com/hakonharnes/img-clip.nvim
-
-- [img-clip.nvim]'s configuration now has it's own DAG entry, separate from
-  image-nvim.
-
-[phanirithvij](https://github.com/phanirithvij):
-
-[elm-language-server]: https://github.com/elm-tooling/elm-language-server
-
-- Add Elm support with [elm-language-server]
-
-[alv-around](https://github.com/alv-around):
-
-- Fix `vim.assistant.codecompanion-nvim` lazy loading with [blink-cmp]
 
 [foobar14](https://github.com/foobar14):
 
