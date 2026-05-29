@@ -2,105 +2,88 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
-  inherit (builtins) attrNames;
+  inherit (lib.attrsets) attrNames genAttrs;
   inherit (lib.options) mkOption mkEnableOption literalExpression;
   inherit (lib.meta) getExe;
   inherit (lib.modules) mkIf mkMerge;
   inherit (lib.types) enum listOf;
-  inherit (lib) genAttrs;
-  inherit (lib.nvim.types) mkGrammarOption deprecatedSingleOrListOf enumWithRename;
   inherit (lib.nvim.attrsets) mapListToAttrs;
+  inherit (lib.nvim.types) mkGrammarOption;
 
-  cfg = config.vim.languages.json;
+  cfg = config.vim.languages.pug;
 
-  defaultServers = ["vscode-json-language-server"];
-  servers = ["vscode-json-language-server"];
+  defaultServers = ["emmet-ls"];
+  servers = ["emmet-ls"];
 
-  defaultFormat = ["jsonfmt"];
-
+  defaultFormat = ["prettier"];
   formats = {
-    jsonfmt = {
-      command = getExe pkgs.jsonfmt;
-      args = ["-w" "-"];
-    };
-
     prettier = {
       command = getExe pkgs.prettier;
-    };
-
-    prettierd = {
-      command = getExe pkgs.prettierd;
+      options.ft_parsers.pug = "pug";
+      prepend_args = let
+        parser = "${inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.prettier-plugin-pug}/index.js";
+      in ["--plugin=${parser}"];
     };
   };
 in {
-  options.vim.languages.json = {
-    enable = mkEnableOption "JSON language support";
+  options.vim.languages.pug = {
+    enable = mkEnableOption "Pug language support";
 
     treesitter = {
       enable =
-        mkEnableOption "JSON treesitter"
+        mkEnableOption "Pug treesitter"
         // {
           default = config.vim.languages.enableTreesitter;
           defaultText = literalExpression "config.vim.languages.enableTreesitter";
         };
-
-      jsonPackage = mkGrammarOption pkgs "json";
-      json5Package = mkGrammarOption pkgs "json5";
+      package = mkGrammarOption pkgs "pug";
     };
 
     lsp = {
       enable =
-        mkEnableOption "JSON LSP support"
+        mkEnableOption "Pug LSP support"
         // {
           default = config.vim.lsp.enable;
           defaultText = literalExpression "config.vim.lsp.enable";
         };
-
       servers = mkOption {
-        type = listOf (enumWithRename
-          "vim.languages.json.lsp.servers"
-          servers
-          {
-            jsonls = "vscode-json-language-server";
-          });
+        type = listOf (enum servers);
         default = defaultServers;
-        description = "JSON LSP server to use";
+        description = "Pug LSP server to use";
       };
     };
 
     format = {
       enable =
-        mkEnableOption "JSON formatting"
+        mkEnableOption "Pug formatting"
         // {
           default = config.vim.languages.enableFormat;
           defaultText = literalExpression "config.vim.languages.enableFormat";
         };
 
       type = mkOption {
-        description = "JSON formatter to use";
-        type = deprecatedSingleOrListOf "vim.language.json.format.type" (enum (attrNames formats));
+        type = listOf (enum (attrNames formats));
         default = defaultFormat;
+        description = "Pug formatter to use";
       };
     };
   };
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.treesitter.enable {
-      vim.treesitter.enable = true;
-      vim.treesitter.grammars = [
-        cfg.treesitter.jsonPackage
-        cfg.treesitter.json5Package
-      ];
+      vim.treesitter = {
+        enable = true;
+        grammars = [cfg.treesitter.package];
+      };
     })
 
     (mkIf cfg.lsp.enable {
       vim.lsp = {
         presets = genAttrs cfg.lsp.servers (_: {enable = true;});
-        servers = genAttrs cfg.lsp.servers (_: {
-          filetypes = ["json" "jsonc" "json5"];
-        });
+        servers = genAttrs cfg.lsp.servers (_: {filetypes = ["pug"];});
       };
     })
 
@@ -108,8 +91,7 @@ in {
       vim.formatter.conform-nvim = {
         enable = true;
         setupOpts = {
-          formatters_by_ft.json = cfg.format.type;
-          formatters_by_ft.json5 = cfg.format.type;
+          formatters_by_ft.pug = cfg.format.type;
           formatters =
             mapListToAttrs (name: {
               inherit name;

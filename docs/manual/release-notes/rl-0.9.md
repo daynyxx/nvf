@@ -118,6 +118,10 @@
   SCSS/SASS. This also changes the default LSP to `some-sass-language-server`
   for SCSS/SASS.
 
+- Split React/TSX from `languages.typescript` into `languages.tsx`. This new
+  module provides jsx/tsx support. This is a step of cleaning up the Typescript
+  module for the future.
+
 [CaueAnjos](https://github.com/caueanjos)
 
 - Renamed `roslyn_ls` to `roslyn-ls`
@@ -125,6 +129,14 @@
 - Turned `csharpls-extended-lsp-nvim` into an extension disabled by default
 
 ## Changelog {#sec-release-0-9-changelog}
+
+[ErinaYip](https://github.com/ErinaYip):
+
+- Fixed and updated `lualine` options:
+  - Enabled the previously unmapped
+    {option}`vim.statusline.lualine.ignoreFocus`.
+  - Added {option}`vim.statusline.lualine.disabledFiletypes.statusline` and
+    {option}`vim.statusline.lualine.disabledFiletypes.winbar`.
 
 [SecBear](https://github.com/SecBear):
 
@@ -258,6 +270,9 @@
     actually correspond to any keybinds.
 
 - Allow disabling nvf's vendored keymaps by toggling `vendoredKeymaps.enable`.
+
+- Add {option}`vim.languages.pug.enable`, which adds the treesitter grammar and
+  enables `emmet-ls` for pug files.
 
 [pyrox0](https://github.com/pyrox0):
 
@@ -402,6 +417,8 @@
 
 - Added `asmfmt` and `nasmfmt` formatters to `languages.asm`.
 
+- Added `astyle`, `indent` and `clang-format` to `languages.clang` formatters.
+
 - Added `biome-check` and `biome-organize-imports` formatters to `languages.ts`.
 
 - Added [`biomejs`](https://biomejs.dev/) as extra diagnostics provider to
@@ -518,5 +535,17 @@ https://github.com/gorbit99/codewindow.nvim
   indentation does not work good
 - Allow `vim.treesitter.context.setupOpts.max_lines` to also be given as a
   string in order to allow percentage values like `"20%"`
+
+[RoastedCheese](https://github.com/roastedcheese):
+
+- Fix `golangci-lint` to lint at the package level.
+
+[Poseidon](https://github.com/poseidon-rises)
+
+[PHPStan]: https://github.com/phpstan/phpstan
+
+- Add [PHPStan] as a formatter for `vim.languages.php`.
+- Add `prettier` and `prettierd` as supported formatters to
+  `vim.languages.json`.
 
 <!-- vim: set textwidth=80: -->
