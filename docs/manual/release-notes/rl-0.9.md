@@ -122,6 +122,11 @@
   module provides jsx/tsx support. This is a step of cleaning up the Typescript
   module for the future.
 
+[dathegreat](https://github.com/dathegreat):
+
+- Haskell LSP now defaults to haskell-language-server, haskell-tools based LSP
+  support is moved to `vim.languages.haskell.extensions.haskell-tools`
+
 [CaueAnjos](https://github.com/caueanjos)
 
 - Renamed `roslyn_ls` to `roslyn-ls`
@@ -129,6 +134,11 @@
 - Turned `csharpls-extended-lsp-nvim` into an extension disabled by default
 
 ## Changelog {#sec-release-0-9-changelog}
+
+[bovf](https://github.com/bovf):
+
+- Removed the deprecated `system_open` setup option from `nvim-tree.lua` to
+  avoid startup warnings now that upstream uses `vim.ui.open()`.
 
 [ErinaYip](https://github.com/ErinaYip):
 
@@ -212,6 +222,13 @@
 
 - Updated nix language plugin to use pkgs.nixfmt instead of
   pkgs.nixfmt-rfc-style
+
+[dathegreat](https://github.com/dathegreat):
+
+- Fixed invalid keys in the haskell-tools configuration
+- Split haskell configuration into `lsp/presets/haskell-language-server.nix` and
+  `languages/haskell.nix`
+- Made the haskell LSP and formatter configurable
 
 [alfarel](https://github.com/alfarelcynthesis):
 
@@ -311,6 +328,8 @@
   options created via `mkGrammarOption`.
 
 - Add `emmet-ls` to the supported LSPs for all languages it supports.
+
+- Added `phpantom` LSP preset and into `languages.php`.
 
 - Added {option}`vim.treesitter.queries` to support adding custom queries.
 
@@ -500,6 +519,7 @@ https://github.com/gorbit99/codewindow.nvim
 [horriblename](https://github.com/horriblename):
 
 - Ignore terminals by default in spell-checking
+- Add default error filter to lsp-signature that prevents error spam.
 
 [poz](https://poz.pet):
 
